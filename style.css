@@ -89,3 +89,33 @@ footer{padding-bottom:30px}
 .khl-cover>img{object-position:50% 5%}
 .gallery .photo .media-frame img{object-position:50% 5%}
 @media(min-width:1001px){.work-card{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}.cover,.cover:not(.identity-cover){height:clamp(320px,56svh,450px)}}
+
+/* Fill preview frames. Their proportions follow width, never viewport height. */
+.gallery .media-frame,.gallery.triple .media-frame,.model-section .gallery .media-frame,.gallery .wide .media-frame,.gallery .photo .media-frame{height:auto;min-height:0;max-height:none;aspect-ratio:4/3;padding:0;background:transparent}
+.gallery .media-frame img,.model-section .gallery .media-frame img{width:100%;height:100%;object-fit:cover;object-position:center}
+.gallery .photo .media-frame img{object-position:50% 8%}
+#brand-source .media-frame,#colors .media-frame,.model-section .gallery .media-frame{aspect-ratio:16/9}
+.gallery .wide .media-frame{aspect-ratio:16/9}
+.gallery .strip .media-frame{aspect-ratio:1801/219;padding:0;background:#fff}
+.gallery .strip .media-frame img{object-fit:cover}
+.collection-overview .model-link img{object-fit:cover;object-position:50% 8%}
+@media(max-width:700px){
+ .gallery .photo .media-frame{aspect-ratio:4/5}
+ .gallery.triple .photo .media-frame{aspect-ratio:4/3}
+ #brand-source .media-frame,#colors .media-frame,.model-section .gallery .media-frame{aspect-ratio:16/9}
+}
+/* Technical sheets use a wider crop to retain their labels. */
+.model-section .gallery .media-frame{aspect-ratio:2/1}
+#chudo .gallery figure:has([data-image="chudo-family"]) .media-frame img{object-position:50% 0%}
+#chudo .gallery figure:has([data-image="chudo-ribbons-clean"]),#chudo .gallery figure:has([data-image="chudo-6"]){grid-row:2}
+#chudo .gallery figure:has([data-image="chudo-illustrations-clean"]){grid-row:3}
+#chudo .gallery figure:has([data-image="chudo-ribbons-clean"]) .media-frame,#chudo .gallery figure:has([data-image="chudo-6"]) .media-frame{aspect-ratio:16/9}
+#voz .gallery figure:has([data-image="voz-webpattern"]) .media-frame,#voz .gallery figure:has([data-image="voz-6"]) .media-frame{aspect-ratio:16/9}
+#voz .gallery figure:has([data-image="voz-6"]){grid-column:2;grid-row:1}
+@media(max-width:700px){
+ #chudo .gallery figure,#voz .gallery figure{grid-column:auto!important;grid-row:auto!important}
+ .model-section .gallery .media-frame{aspect-ratio:2/1}
+}
+.model-section .gallery .media-frame{aspect-ratio:1600/785}
+.model-section .gallery figure:nth-child(2) .media-frame img{object-position:50% 0%}
+[data-image="sweatshirt-2-product"] .media-frame img{object-position:50% 5%!important}
