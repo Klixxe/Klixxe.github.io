@@ -8,7 +8,14 @@ const track=(event,params={})=>window.portfolioTrack?.(event,params);
 let currentCase=null,homeScroll=0,observer=null,viewed=new Set(),galleryItems=[],galleryIndex=0,galleryOpener=null;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const picture=(name,caption,extra='')=>{const d=ASSET_SIZES[name]||[1800,1200];return `<img src="assets/${name}.webp" alt="${esc(caption)}" width="${d[0]}" height="${d[1]}" loading="lazy" ${extra}>`;};
-function figure(item,group){const [name,caption,wide]=item;return `<figure class="${wide==='wide'?'wide':''}"><button class="image-button" data-image="${name}" data-gallery="${group}" data-caption="${esc(caption)}" aria-label="Увеличить: ${esc(caption)}">${picture(name,caption)}<span class="zoom-hint" aria-hidden="true">Увеличить +</span></button><figcaption>${esc(caption)}</figcaption></figure>`;}
+function figure(item,group){
+ const [name,caption,wide]=item;
+ const photo=/^(aurora-model|gold-photo|astro-model|sand-model)/.test(name);
+ const strip=name==='chudo-illustrations-clean';
+ const dark=/^(aurora|gold|astro|sand)-preview$/.test(name);
+ const classes=[wide==='wide'?'wide':'',photo?'photo':'artwork',strip?'strip':'',dark?'dark-art':''].filter(Boolean).join(' ');
+ return `<figure class="${classes}"><button class="image-button" data-image="${name}" data-gallery="${group}" data-caption="${esc(caption)}" aria-label="Увеличить: ${esc(caption)}"><span class="media-frame">${picture(name,caption)}</span><span class="zoom-hint" aria-hidden="true">Увеличить +</span></button><figcaption>${esc(caption)}</figcaption></figure>`;
+}
 const gallery=(items,id,layout='')=>`<div class="gallery ${layout}">${items.map(item=>figure(item,id)).join('')}</div>`;
 const heading=(id,num,title,text)=>`<div class="case-section-heading"><span class="section-num" aria-hidden="true">${num}</span><div><h2 data-view="${id}">${title}</h2>${text?`<p>${text}</p>`:''}</div></div>`;
 const section=(id,num,title,text,inside='',cls='')=>`<section class="case-section ${cls}" id="${id}">${heading(id,num,title,text)}${inside}</section>`;
@@ -47,10 +54,4 @@ let touchX=0,touchY=0;viewerStage.addEventListener('touchstart',e=>{touchX=e.cha
 window.addEventListener('hashchange',()=>{if(viewer.open)viewer.close();route();});window.addEventListener('scroll',updateProgress,{passive:true});
 typography(home);route();
 
-document.querySelector('#back-top').addEventListener('click',()=>{window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});});
-const quickActions=document.querySelector('.quick-actions');
-function updateQuickActions(){quickActions.hidden=window.scrollY<300;}
-window.addEventListener('scroll',updateQuickActions,{passive:true});
-window.addEventListener('hashchange',updateQuickActions);
-updateQuickActions();
-
+document.querySelectorAll('[data-back-top]').forEach(button=>button.addEventListener('click',()=>window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})));
