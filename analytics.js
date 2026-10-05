@@ -25,3 +25,4 @@
   window.ym(counterId,'reachGoal',goal,params);
  };
 })();
+
