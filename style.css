@@ -119,3 +119,14 @@ footer{padding-bottom:30px}
 .model-section .gallery .media-frame{aspect-ratio:1600/785}
 .model-section .gallery figure:nth-child(2) .media-frame img{object-position:50% 0%}
 [data-image="sweatshirt-2-product"] .media-frame img{object-position:50% 5%!important}
+
+/* Readable blackletter K; complete kit overviews and individual product focal points. */
+@font-face{font-family:KlixxeReadable;src:url('klixxe-gothic.ttf') format('truetype');font-weight:100 900;font-display:swap}
+.brand,.signature-mark,.work-number,.section-num{font-family:KlixxeReadable,Georgia,serif}
+.brand,.signature-mark{font-weight:700;letter-spacing:.01em}
+.gallery figure.dark-art .media-frame{aspect-ratio:4/3;height:auto;background:#191919}
+.gallery figure.dark-art .media-frame img{object-fit:contain;object-position:center}
+.model-section .gallery [data-image="longsleeve-product"] .media-frame img{object-position:50% 35%}
+.model-section .gallery [data-image="hoodie-product-final"] .media-frame img{object-position:50% 30%}
+.model-section .gallery [data-image="khl-tee"] .media-frame img{object-position:50% 30%}
+.model-section .gallery [data-image="oversize-product-final"] .media-frame img{object-position:50% 60%}
